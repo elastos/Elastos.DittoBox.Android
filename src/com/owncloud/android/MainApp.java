@@ -37,6 +37,8 @@ import com.owncloud.android.lib.common.authentication.oauth.OAuth2ProvidersRegis
 import com.owncloud.android.lib.common.authentication.oauth.OwnCloudOAuth2Provider;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
+import org.elastos.portForwarding.PfdAgent;
+
 
 /**
  * Main Application of the project
@@ -111,6 +113,8 @@ public class MainApp extends Application {
             Log_OC.startLogging(Environment.getExternalStorageDirectory().getAbsolutePath());
             Log_OC.d("Debug", "start logging");
         }
+
+        PfdAgent.singleton().start();
 
         // register global protection with pass code
         registerActivityLifecycleCallbacks( new ActivityLifecycleCallbacks() {

@@ -40,6 +40,7 @@ configurations.all {
 
 dependencies {
     /// dependencies for app building
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':touchImageView')
     compile project(':owncloud-android-library')
     compile "com.android.support:support-v4:${supportLibraryVersion}"
@@ -48,6 +49,12 @@ dependencies {
     compile 'com.google.android.exoplayer:exoplayer:r2.2.0'
     compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
     compile 'com.getbase:floatingactionbutton:1.10.1'
+    compile 'pub.devrel:easypermissions:0.4.0'
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
+    compile 'cn.bingoogolapple:bga-adapter:1.1.9@aar'
+    compile 'cn.bingoogolapple:bga-photopicker:1.2.3@aar'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
 
     /// dependencies for local unit tests
@@ -121,6 +128,7 @@ android {
             renderscript.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
         }
 
         beta {

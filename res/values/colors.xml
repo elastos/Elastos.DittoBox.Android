@@ -60,4 +60,10 @@
     <!-- Warning message background -->
     <color name="warning_background_color">#E0E0E0</color>
 
+    <color name="scanCornerColor">#1379D6</color>
+    <color name="listDividerBackground">#DDDDDD</color>
+    <color name="deviceDetailTextColor">#999999</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="ColorWarning">#FF0000</color>
 </resources>

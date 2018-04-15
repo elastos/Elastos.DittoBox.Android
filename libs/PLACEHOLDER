@@ -1,0 +1,6 @@
+elacarrier.jar
+armeabi/libcarrierjni.so
+armeabi-v7a/libcarrierjni.so
+arm64-v8a/libcarrierjni.so
+x86/libcarrierjni.so
+x86_64/libcarrierjni.so
