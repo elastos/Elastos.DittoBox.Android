@@ -58,5 +58,5 @@ All works bases on ownCloud and elastos carrier Android SDK. Thanks to ownCloud 
 
 ## License
 
-GPLv3
+GPLv2
 
