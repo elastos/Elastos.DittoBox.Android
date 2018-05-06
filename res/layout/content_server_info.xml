@@ -113,13 +113,14 @@
             android:gravity="center_vertical"
             android:textColor="@color/deviceDetailTextColor"
             android:textSize="@dimen/section_header_text_size"
-            android:text="服务" />
+            android:text="端口号" />
 
         <EditText
             android:id="@+id/server_service_value"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/server_service_label"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -127,7 +128,7 @@
             android:textAlignment="textEnd"
             android:textColor="@color/textColor"
             android:textSize="@dimen/section_header_text_size"
-            android:inputType="text"
+            android:inputType="number"
             android:cursorVisible="true"
             android:background="@null"/>
 

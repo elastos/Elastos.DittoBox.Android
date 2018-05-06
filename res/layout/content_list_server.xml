@@ -33,6 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/textColor"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="@dimen/two_line_primary_text_size"/>
 
             <TextView

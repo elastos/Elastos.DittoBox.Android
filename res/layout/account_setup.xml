@@ -83,11 +83,11 @@
                 android:layout_gravity="bottom"
                 android:contentDescription="@string/auth_host_address"
                 android:drawablePadding="5dp"
-                android:hint="@string/auth_host_url"
-                android:inputType="textUri"
                 android:paddingRight="55dp"
                 android:textColor="@color/login_text_color"
                 android:textColorHint="@color/login_text_hint_color"
+                android:singleLine="true"
+                android:enabled="false"
                 >
 
                 <requestFocus/>
@@ -98,13 +98,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="50dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/auth_refresh_button"
                 android:padding="0dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_action_refresh_grey"
                 android:visibility="gone"
+                />
+
+            <ImageButton
+                android:id="@+id/chooseDeviceButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/transparent"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/forward"
                 />
         </FrameLayout>
 

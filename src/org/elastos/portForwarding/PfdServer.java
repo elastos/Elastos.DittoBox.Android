@@ -15,14 +15,12 @@ import org.elastos.carrier.PresenceStatus;
 import org.elastos.carrier.session.*;
 import org.elastos.carrier.exceptions.ElastosException;
 
-class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteHandler {
+public class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteHandler {
 	private static String TAG = "PfServer";
 
 	public static String ACTION_SERVER_STATUS_CHANGED = "ACTION_SERVER_STATUS_CHANGED";
 
 	private FriendInfo mFriendInfo;
-	private ConnectionStatus mConnectionStatus;
-	private PresenceStatus mPresenceStatus;
 	private Session mSession;
 	private String  mPort;
 	private int mPfId;
@@ -31,11 +29,10 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 
 	private boolean mNeedClosePortforwarding = false;
 
-	private static final int STATUS_READY   = 0;
-	private static final int STATUS_INPROGRESS = 1;
-	private static final int STATUS_OFFLINE = 2;
-	private static final int STATUS_SERVICE_NULL = 3;
-	private static final int STATUS_SESSION_REFUSED = 4;
+	public static final int STATUS_READY   = 0;
+	public static final int STATUS_INPROGRESS = 1;
+	public static final int STATUS_OFFLINE = 2;
+	public static final int STATUS_SESSION_REFUSED = 3;
 
 	PfdServer() {}
 
@@ -55,10 +52,24 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 
 	public void setPort(String port) {
 		if (mPort != port) {
-			mNeedClosePortforwarding = true;
 			mPort = port;
 			savePreferences();
-			PfdAgent.singleton().notifyAgentStatus(STATUS_READY);
+
+			PfdAgent.singleton().notifyServerInfoChanged(getServerId());
+
+            if (mState == StreamState.Connected) {
+                try {
+                    mNeedClosePortforwarding = true;
+                    openPortforwarding();
+                    notifyPortforwardingStatus(STATUS_READY);
+                } catch (ElastosException e) {
+                    e.printStackTrace();
+
+                    Log.e(TAG, "Portforwarding to " + getServerId() + " opened error.");
+                    notifyPortforwardingStatus(e.getErrorCode());
+                }
+                return;
+            }
 		}
 	}
 
@@ -68,16 +79,16 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 	}
 
 	public void setConnectionStatus(ConnectionStatus connectionStatus) {
-		mConnectionStatus = connectionStatus;
+		mFriendInfo.setConnectionStatus(connectionStatus);
 	}
 
 	public void setPresenceStatus(PresenceStatus presence) {
-		mPresenceStatus = presence;
+		mFriendInfo.setPresence(presence);
 	}
 
 	public boolean isOnline() {
-		return mConnectionStatus == ConnectionStatus.Connected &&
-				mPresenceStatus == PresenceStatus.None;
+		return mFriendInfo.getConnectionStatus() == ConnectionStatus.Connected &&
+				mFriendInfo.getPresence() == PresenceStatus.None;
 	}
 
 	@Override
@@ -124,6 +135,7 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 
 	@Override
 	public void onStateChanged(Stream stream, StreamState state) {
+		Log.i(TAG, "onStateChanged : " + stream.getStreamId() + "  :  " + state);
 		mState = state;
 		try {
 			switch (state) {
@@ -184,11 +196,6 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 			return;
 		}
 
-		if (mPort == null || mPort.isEmpty()) {
-			notifyPortforwardingStatus(STATUS_SERVICE_NULL);
-			return;
-		}
-
 		if (mState == StreamState.Initialized || mState == StreamState.TransportReady
 			|| mState == StreamState.Connecting) {
 			notifyPortforwardingStatus(STATUS_INPROGRESS);
@@ -243,11 +250,18 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 			if (mPfId > 0) {
 				mStream.closePortForwarding(mPfId);
 				mPfId = -1;
+                mNeedClosePortforwarding = false;
 			}
 
-			mPort = String.valueOf(findFreePort());
+			String port = mPort;
+			if (port == null || port.isEmpty()) {
+				port = String.valueOf(findFreePort());;
+			}
 			mPfId = mStream.openPortFowarding("owncloud", PortForwardingProtocol.TCP,
-											"127.0.0.1", mPort);
+											"127.0.0.1", port);
+
+			mPort = port;
+			savePreferences();
 
 			Log.i(TAG, "Portforwarding to " + getName() + " opened.");
 		}
@@ -267,6 +281,16 @@ class PfdServer extends AbstractStreamHandler implements SessionRequestCompleteH
 			mStream = null;
 			mState  = StreamState.Closed;
 			mPfId = -1;
+		}
+	}
+
+	public boolean isConnected() {
+		if (mPfId > 0) {
+			return true;
+		}
+		else {
+			setupPortforwarding();
+			return false;
 		}
 	}
 }

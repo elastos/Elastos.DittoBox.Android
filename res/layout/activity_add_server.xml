@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.elastos.portForwarding.AddServerActivity">
+    android:orientation="vertical" >
 
-    <include layout="@layout/content_add_server"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:text="请输入密码"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="#999999"
+        android:textSize="16sp" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <EditText
+        android:id="@+id/et_pair_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/shape_red_corners_edittext"
+        android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_pair"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/shape_red_corners_button_pressed"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginTop="20dp"
+        android:text="确定"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+</LinearLayout>

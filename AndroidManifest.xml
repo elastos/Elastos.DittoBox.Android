@@ -272,6 +272,8 @@
             android:name="org.elastos.portForwarding.ServerListActivity"
             android:theme="@style/Theme.ownCloud" />
         <activity
+            android:name="org.elastos.portForwarding.QRCodeScanActivity" />
+        <activity
             android:name="org.elastos.portForwarding.AddServerActivity"
             android:theme="@style/Theme.ownCloud" />
         <activity
