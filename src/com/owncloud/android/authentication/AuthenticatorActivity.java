@@ -761,9 +761,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         public void onReceive(Context context, Intent intent) {
             int status = intent.getExtras().getInt("status");
             if (status == PfdServer.STATUS_READY) {
-                String deviceId = intent.getExtras().getString("deviceId");
+                String serverId = intent.getExtras().getString("serverId");
                 PfdServer pfdServer = PfdAgent.singleton().getCheckedServer();
-                if (pfdServer != null && pfdServer.getServerId().equals(deviceId)) {
+                if (pfdServer != null && pfdServer.getServerId().equals(serverId)) {
                     checkOcServer();
                 }
             }
