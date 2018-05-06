@@ -6,10 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +28,7 @@ import java.util.List;
 import org.elastos.carrier.exceptions.ElastosException;
 
 public class ServerListActivity extends AppCompatActivity {
-	private static final String TAG = AddServerActivity.class.getSimpleName();;
+	private static final String TAG = ServerListActivity.class.getSimpleName();;
 
 	private DeviceRecyclerViewAdapter mAdapter;
 
@@ -37,16 +37,19 @@ public class ServerListActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_server_list);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle("服务节点列表");
-		setSupportActionBar(toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayShowTitleEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setTitle("服务节点列表");
+		}
 
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.server_list);
 		setupRecyclerView(recyclerView);
 
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PfdAgent.ACTION_SERVER_LIST_CHANGED);
+		filter.addAction(PfdAgent.ACTION_SERVER_INFO_CHANGED);
 		registerReceiver(broadcastReceiver, filter);
 	}
 
@@ -73,7 +76,7 @@ public class ServerListActivity extends AppCompatActivity {
 		int id = item.getItemId();
 
 		if (id == R.id.action_add_server) {
-			startActivity(new Intent(this, AddServerActivity.class));
+			startActivity(new Intent(this, QRCodeScanActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -145,6 +148,15 @@ public class ServerListActivity extends AppCompatActivity {
 			else
 				holder.mTitleView.setText(server.getName());
 
+			String port = server.getPort();
+			if (port == null || port.isEmpty()) {
+                holder.mSubtitleView.setVisibility(View.GONE);
+            }
+            else {
+			    holder.mSubtitleView.setText("http://127.0.0.1:" + port);
+                holder.mSubtitleView.setVisibility(View.VISIBLE);
+            }
+
 			if (server.isOnline())
 				holder.mStatusIcon.setImageResource(android.R.drawable.presence_online);
 			else
@@ -192,6 +204,7 @@ public class ServerListActivity extends AppCompatActivity {
 			public final View mView;
 			public final ImageView mFocusIcon;
 			public final TextView mTitleView;
+			public final TextView mSubtitleView;
 			public final ImageView mStatusIcon;
 			public final ImageView mDetailIcon;
 			public PfdServer mServer;
@@ -201,6 +214,7 @@ public class ServerListActivity extends AppCompatActivity {
 				mView = view;
 				mFocusIcon = (ImageView) view.findViewById(R.id.focusIcon);
 				mTitleView = (TextView)view.findViewById(R.id.title);
+				mSubtitleView = (TextView)view.findViewById(R.id.subtitle);
 				mStatusIcon = (ImageView) view.findViewById(R.id.statusIcon);
 				mDetailIcon = (ImageView) view.findViewById(R.id.detailIcon);
 			}

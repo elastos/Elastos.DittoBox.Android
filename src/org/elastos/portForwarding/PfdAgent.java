@@ -10,6 +10,8 @@ import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 
 import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -199,14 +201,21 @@ public class PfdAgent extends AbstractCarrierHandler {
 	public void setCheckedServer(String serverId) {
 		PfdServer server = mServerMap.get(serverId);
 
-		if (server != null) {
+		if (server != null && server != mCheckedServer) {
 			Log.i(TAG, "Checked server changed to " + serverId);
+
+			if (mCheckedServer != null) {
+                mCheckedServer.close();
+            }
+
 			mCheckedServer = server;
 
 			savePreferences();
 
-			if (mStatus == ConnectionStatus.Connected)
-				notifyAgentStatus(AGENT_READY);
+			if (mStatus == ConnectionStatus.Connected) {
+                notifyAgentStatus(AGENT_READY);
+                mCheckedServer.setupPortforwarding();
+            }
 		}
 	}
 
@@ -222,9 +231,10 @@ public class PfdAgent extends AbstractCarrierHandler {
 		return mServerMap.get(serverId);
 	}
 
-	public void pairServer(String serverId) throws ElastosException {
+	public void pairServer(String serverId, String password) throws ElastosException {
 		if (!mCarrier.isFriend(serverId)) {
-			mCarrier.addFriend(serverId, "owncloud");
+			String hello = hash256(password);
+			mCarrier.addFriend(serverId, hello);
 			Log.i(TAG, "Friend request to portforwarding server " + serverId + " success");
 		}
 	}
@@ -278,8 +288,6 @@ public class PfdAgent extends AbstractCarrierHandler {
 
 		Log.i(TAG, "Elastos carrier instance is ready.");
 
-		loadPreferences();
-
 		if (mCheckedServer == null) {
 			for (PfdServer server: mServerList) {
 				if (server.isOnline()) {
@@ -296,7 +304,7 @@ public class PfdAgent extends AbstractCarrierHandler {
 
 	@Override
 	public void onFriends(Carrier carrier, List<FriendInfo> friends) {
-		Log.i(TAG, "Client portforwarding agent received friend list ");
+		Log.i(TAG, "Client portforwarding agent received friend list: " + friends);
 
 		for (FriendInfo info: friends) {
 			String serverId = info.getUserId();
@@ -313,6 +321,8 @@ public class PfdAgent extends AbstractCarrierHandler {
 			server.setConnectionStatus(info.getConnectionStatus());
 			server.setPresenceStatus(info.getPresence());
 		}
+
+        loadPreferences();
 
 		notifyServerChanged();
 	}
@@ -333,12 +343,20 @@ public class PfdAgent extends AbstractCarrierHandler {
 		PfdServer server = mServerMap.get(friendId);
 		assert(server != null);
 
-		Log.i(TAG, "Server" + friendId + "connection status changed to " + status);
+		Log.i(TAG, "Server " + friendId + " connection status changed to " + status);
 
 		server.setConnectionStatus(status);
+        notifyServerInfoChanged(server.getServerId());
 
-		if (server.equals(mCheckedServer))
-			notifyAgentStatus(AGENT_READY);
+		if (server.equals(mCheckedServer)) {
+            notifyAgentStatus(AGENT_READY);
+
+            if (server.isOnline()) {
+                server.setupPortforwarding();
+            } else {
+                server.close();
+            }
+        }
 
 		notifyServerChanged();
 	}
@@ -351,9 +369,17 @@ public class PfdAgent extends AbstractCarrierHandler {
 		Log.i(TAG, "Server" + friendId + "presence changed to " + presence);
 
 		server.setPresenceStatus(presence);
+        notifyServerInfoChanged(server.getServerId());
 
-		if (server.equals(mCheckedServer))
-			notifyAgentStatus(AGENT_READY);
+		if (server.equals(mCheckedServer)) {
+            notifyAgentStatus(AGENT_READY);
+
+            if (server.isOnline()) {
+                server.setupPortforwarding();
+            } else {
+                server.close();
+            }
+        }
 
 		notifyServerChanged();
 	}
@@ -368,7 +394,7 @@ public class PfdAgent extends AbstractCarrierHandler {
 		mServerList.add(server);
 		mServerMap.put(server.getServerId(), server);
 
-		Log.i(TAG, "Server " + server.getServerId() + "added.");
+		Log.i(TAG, "Server " + server.getServerId() + " added: " + friendInfo);
 
 		if (mCheckedServer == null) {
 			mCheckedServer = server;
@@ -420,8 +446,35 @@ public class PfdAgent extends AbstractCarrierHandler {
 		MainApp.getAppContext().sendBroadcast(intent);
 	}
 
-	private void notifyServerInfoChanged(String userName) {
+    public void notifyServerInfoChanged(String userName) {
 		Intent intent = new Intent(ACTION_SERVER_INFO_CHANGED);
 		MainApp.getAppContext().sendBroadcast(intent);
 	}
+
+    private String hash256(String string) {
+        MessageDigest md = null;
+        String result = null;
+        byte[] bt = string.getBytes();
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+            md.update(bt);
+            result = bytes2Hex(md.digest()); // to HexString
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+        return result;
+    }
+
+    private String bytes2Hex(byte[] bts) {
+        String des = "";
+        String tmp = null;
+        for (int i = 0; i < bts.length; i++) {
+            tmp = (Integer.toHexString(bts[i] & 0xFF));
+            if (tmp.length() == 1) {
+                des += "0";
+            }
+            des += tmp;
+        }
+        return des;
+    }
 }

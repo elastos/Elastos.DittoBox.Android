@@ -27,9 +27,11 @@ package com.owncloud.android.authentication;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -104,6 +106,10 @@ import com.owncloud.android.ui.dialog.SslUntrustedCertDialog;
 import com.owncloud.android.ui.dialog.SslUntrustedCertDialog.OnSslUntrustedCertListener;
 import com.owncloud.android.ui.errorhandling.ErrorMessageAdapter;
 import com.owncloud.android.utils.DisplayUtils;
+
+import org.elastos.portForwarding.PfdAgent;
+import org.elastos.portForwarding.PfdServer;
+import org.elastos.portForwarding.ServerListActivity;
 
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -298,6 +304,13 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
             }
         });
 
+        findViewById(R.id.chooseDeviceButton).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AuthenticatorActivity.this, ServerListActivity.class));
+            }
+        });
 
         /// initialize block to be moved to single Fragment to check server and get info about it 
         initServerPreFragment(savedInstanceState);
@@ -430,15 +443,27 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         
         /// step 2 - set properties of UI elements (text, visibility, enabled...)
         mHostUrlInput = (EditText) findViewById(R.id.hostUrlInput);
+        PfdServer pfdServer = PfdAgent.singleton().getCheckedServer();
+        if (pfdServer != null) {
+            String serverName = pfdServer.getName();
+            if (serverName != null && !serverName.isEmpty()) {
+                mHostUrlInput.setText(pfdServer.getName());
+            }
+            else {
+                mHostUrlInput.setText(pfdServer.getServerId());
+            }
+        }
+
         // Convert IDN to Unicode
-        mHostUrlInput.setText(DisplayUtils.convertIdn(mServerInfo.mBaseUrl, false));
-        if (mAction != ACTION_CREATE) {
+//        mHostUrlInput.setText(DisplayUtils.convertIdn(mServerInfo.mBaseUrl, false));
+//        if (mAction != ACTION_CREATE) {
             /// lock things that should not change
             mHostUrlInput.setEnabled(false);
             mHostUrlInput.setFocusable(false);
-        }
+//        }
         if (isUrlInputAllowed) {
-            if (mServerInfo.mBaseUrl.isEmpty()) {
+//            if (mServerInfo.mBaseUrl.isEmpty()) {
+            if (pfdServer != null) {
                 checkHostUrl = false;
             }
             mRefreshButton = findViewById(R.id.embeddedRefreshButton);
@@ -677,6 +702,24 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
     protected void onResume() {
         super.onResume();
 
+        PfdServer pfdServer = PfdAgent.singleton().getCheckedServer();
+        if (pfdServer != null) {
+            String serverName = pfdServer.getName();
+            if (serverName != null && !serverName.isEmpty()) {
+                mHostUrlInput.setText(pfdServer.getName());
+            }
+            else {
+                mHostUrlInput.setText(pfdServer.getServerId());
+            }
+        }
+        else {
+            mHostUrlInput.setText("");
+        }
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(PfdServer.ACTION_SERVER_STATUS_CHANGED);
+        this.registerReceiver(broadcastReceiver, filter);
+
         // bound here to avoid spurious changes triggered by Android on device rotations
         mHostUrlInput.setOnFocusChangeListener(this);
         mHostUrlInput.addTextChangedListener(mHostUrlInputWatcher);
@@ -696,6 +739,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         mHostUrlInput.removeTextChangedListener(mHostUrlInputWatcher);
         mHostUrlInput.setOnFocusChangeListener(null);
 
+        this.unregisterReceiver(broadcastReceiver);
+
         super.onPause();
     }
     
@@ -711,6 +756,19 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         super.onDestroy();
     }
 
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int status = intent.getExtras().getInt("status");
+            if (status == PfdServer.STATUS_READY) {
+                String deviceId = intent.getExtras().getString("deviceId");
+                PfdServer pfdServer = PfdAgent.singleton().getCheckedServer();
+                if (pfdServer != null && pfdServer.getServerId().equals(deviceId)) {
+                    checkOcServer();
+                }
+            }
+        };
+    };
 
     /**
      * Parses the redirection with the response to the GET AUTHORIZATION request to the 
@@ -773,15 +831,16 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
      * Handles the change of focus on the text inputs for the server URL and the password
      */
     public void onFocusChange(View view, boolean hasFocus) {
-        if (view.getId() == R.id.hostUrlInput) {   
-            if (!hasFocus) {
-                onUrlInputFocusLost();
-            }
-            else {
-                showRefreshButton(false);
-            }
-
-        } else if (view.getId() == R.id.account_password) {
+//        if (view.getId() == R.id.hostUrlInput) {
+//            if (!hasFocus) {
+//                onUrlInputFocusLost();
+//            }
+//            else {
+//                showRefreshButton(false);
+//            }
+//
+//        } else if (view.getId() == R.id.account_password) {
+        if (view.getId() == R.id.account_password) {
             onPasswordFocusChanged(hasFocus);
         }
     }
@@ -809,16 +868,25 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
 
 
     private void checkOcServer() {
-        String uri = mHostUrlInput.getText().toString().trim();
+//        String uri = mHostUrlInput.getText().toString().trim();
         mServerIsValid = false;
         mServerIsChecked = false;
         mOkButton.setEnabled(false);
         mServerInfo = new GetServerInfoOperation.ServerInfo();
         showRefreshButton(false);
 
-        if (uri.length() != 0) {
-            uri = stripIndexPhpOrAppsFiles(uri, mHostUrlInput);
-            uri = subdomainToLower(uri, mHostUrlInput);
+//        if (uri.length() != 0) {
+//            uri = stripIndexPhpOrAppsFiles(uri, mHostUrlInput);
+//            uri = subdomainToLower(uri, mHostUrlInput);
+        PfdServer pfdServer = PfdAgent.singleton().getCheckedServer();
+        if (pfdServer == null) {
+            mServerStatusText = "";
+            mServerStatusIcon = 0;
+            showServerStatus();
+
+        } else if (pfdServer.isConnected()) {
+            String uri = "http://127.0.0.1:" + pfdServer.getPort() + "/owncloud";
+            Log_OC.d(TAG, "checkOcServer url : " + uri );
 
             // Handle internationalized domain names
             try {
@@ -847,6 +915,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
             mServerStatusText = "";
             mServerStatusIcon = 0;
             showServerStatus();
+            showRefreshButton(true);
         }
     }
 
@@ -1252,13 +1321,13 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
 
             case OK_NO_SSL:
             case OK:
-                if (mHostUrlInput.getText().toString().trim().toLowerCase().startsWith("http://")) {
+//                if (mHostUrlInput.getText().toString().trim().toLowerCase().startsWith("http://")) {
                     mServerStatusText = getResources().getString(R.string.auth_connection_established);
                     mServerStatusIcon = R.drawable.ic_ok;
-                } else {
-                    mServerStatusText = getResources().getString(R.string.auth_nossl_plain_ok_title);
-                    mServerStatusIcon = R.drawable.ic_lock_open;
-                }
+//                } else {
+//                    mServerStatusText = getResources().getString(R.string.auth_nossl_plain_ok_title);
+//                    mServerStatusIcon = R.drawable.ic_lock_open;
+//                }
                 break;
 
             case OK_REDIRECT_TO_NON_SECURE_CONNECTION:
@@ -1288,13 +1357,13 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
                 break;
             case OK_NO_SSL:
             case OK:
-                if (mHostUrlInput.getText().toString().trim().toLowerCase().startsWith("http://")) {
+//                if (mHostUrlInput.getText().toString().trim().toLowerCase().startsWith("http://")) {
                     mAuthStatusText = getResources().getString(R.string.auth_connection_established);
                     mAuthStatusIcon = R.drawable.ic_ok;
-                } else {
-                    mAuthStatusText = getResources().getString(R.string.auth_nossl_plain_ok_title);
-                    mAuthStatusIcon = R.drawable.ic_lock_open;
-                }
+//                } else {
+//                    mAuthStatusText = getResources().getString(R.string.auth_nossl_plain_ok_title);
+//                    mAuthStatusIcon = R.drawable.ic_lock_open;
+//                }
                 break;
 
             case NO_NETWORK_CONNECTION:

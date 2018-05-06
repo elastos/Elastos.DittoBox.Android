@@ -1,5 +1,6 @@
 package org.elastos.portForwarding;
 
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -35,11 +36,13 @@ public class ServerInfoActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_server_info);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle("服务节点信息");
 
-		setSupportActionBar(toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayShowTitleEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setTitle("服务节点信息");
+		}
 
 		String serverId = getIntent().getStringExtra("serverId");
 		mServer = PfdAgent.singleton().getServer(serverId);
