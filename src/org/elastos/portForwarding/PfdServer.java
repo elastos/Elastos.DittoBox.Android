@@ -263,7 +263,7 @@ public class PfdServer extends AbstractStreamHandler implements SessionRequestCo
 			mPort = port;
 			savePreferences();
 
-			Log.i(TAG, "Portforwarding to " + getName() + " opened.");
+			Log.i(TAG, "Portforwarding to " + getServerId() + " opened.");
 		}
 	}
 
