@@ -176,6 +176,7 @@ public class QRCodeScanActivity extends AppCompatActivity
     private void addPfServer(String serverId) {
         Intent intent = new Intent(this, AddServerActivity.class);
         intent.putExtra("serverId", serverId);
+        finish();
         startActivity(intent);
     }
 

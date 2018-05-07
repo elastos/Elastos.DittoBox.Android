@@ -318,6 +318,10 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         /// initialize block to be moved to single Fragment to retrieve and validate credentials 
         initAuthorizationPreFragment(savedInstanceState);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(PfdServer.ACTION_SERVER_STATUS_CHANGED);
+        this.registerReceiver(broadcastReceiver, filter);
+
         //Log_OC.e(TAG,  "onCreate end");
     }
 
@@ -716,10 +720,6 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
             mHostUrlInput.setText("");
         }
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(PfdServer.ACTION_SERVER_STATUS_CHANGED);
-        this.registerReceiver(broadcastReceiver, filter);
-
         // bound here to avoid spurious changes triggered by Android on device rotations
         mHostUrlInput.setOnFocusChangeListener(this);
         mHostUrlInput.addTextChangedListener(mHostUrlInputWatcher);
@@ -739,13 +739,12 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         mHostUrlInput.removeTextChangedListener(mHostUrlInputWatcher);
         mHostUrlInput.setOnFocusChangeListener(null);
 
-        this.unregisterReceiver(broadcastReceiver);
-
         super.onPause();
     }
     
     @Override
     protected void onDestroy() {
+        this.unregisterReceiver(broadcastReceiver);
 
         mHostUrlInputWatcher = null;
         
