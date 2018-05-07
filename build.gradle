@@ -40,7 +40,8 @@ configurations.all {
 
 dependencies {
     /// dependencies for app building
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name:'org.elastos.carrier-debug', ext:'aar')
     compile project(':touchImageView')
     compile project(':owncloud-android-library')
     compile "com.android.support:support-v4:${supportLibraryVersion}"

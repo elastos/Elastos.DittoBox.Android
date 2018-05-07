@@ -38,3 +38,5 @@ tests/proguard-project.txt
 .idea
 *.iml
 build
+
+/libs/org.elastos.carrier-*

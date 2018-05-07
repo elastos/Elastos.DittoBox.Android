@@ -885,7 +885,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
             showServerStatus();
 
         } else if (pfdServer.isConnected()) {
-            String uri = "http://127.0.0.1:" + pfdServer.getPort() + "/owncloud";
+            String uri = "http://127.0.0.1:" + pfdServer.getPort();
             Log_OC.d(TAG, "checkOcServer url : " + uri );
 
             // Handle internationalized domain names

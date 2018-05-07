@@ -22,7 +22,7 @@
           android:versionName="${versionName}">
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="21"
         android:targetSdkVersion="26" />
 
     <!--
