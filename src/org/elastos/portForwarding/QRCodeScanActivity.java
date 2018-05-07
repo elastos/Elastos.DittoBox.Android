@@ -66,6 +66,12 @@ public class QRCodeScanActivity extends AppCompatActivity
         this.registerReceiver(finishReceiver, filter);
     }
 
+    @Override
+	protected void onPause() {
+		this.unregisterReceiver(finishReceiver);
+		super.onPause();
+	}
+
 	@Override
 	protected void onStop() {
 		mQRCodeView.stopSpotAndHiddenRect();
