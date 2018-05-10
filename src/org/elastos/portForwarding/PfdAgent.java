@@ -105,7 +105,8 @@ public class PfdAgent extends AbstractCarrierHandler {
 				setUdpEnabled(udpEnabled).
 				setBootstrapNodes(bootstraps);
 
-		mCarrier = Carrier.getInstance(options, this);
+		Carrier.initializeInstance(options, this);
+		mCarrier = Carrier.getInstance();
 		Log.i(TAG, "Agent elastos carrier instance created successfully");
 
 		mSessionManager = Manager.getInstance(mCarrier);
