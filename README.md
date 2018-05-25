@@ -43,7 +43,7 @@ See details for elastos carrier in **https://github.com/elastos/Elastos.NET.Carr
 Before to run DittBox on Android, you need to have DittBox service to connect with. About how to build and install ownCloud server and DittBox agent, please refer to instructions in following repository:
 
 ```
-https://github.com:elastos/Elastos.DittBox.Server
+https://github.com/elastos/Elastos.DittoBox.Server
 ```
 
 ## Run
