@@ -10,7 +10,7 @@
 
 package third_parties.michaelOrtiz;
 
-import com.owncloud.android.ui.preview.ImageViewCustom;
+import org.elastos.ditto.ui.preview.ImageViewCustom;
 
 import android.annotation.TargetApi;
 import android.content.Context;

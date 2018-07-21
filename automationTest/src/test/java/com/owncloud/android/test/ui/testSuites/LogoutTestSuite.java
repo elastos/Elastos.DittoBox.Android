@@ -18,7 +18,7 @@
  *
  */
 
-package com.owncloud.android.test.ui.testSuites;
+package org.elastos.ditto.test.ui.testSuites;
 
 
 import static org.junit.Assert.*;
@@ -31,13 +31,13 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.TestName;
 
-import com.owncloud.android.test.ui.actions.Actions;
-import com.owncloud.android.test.ui.groups.NoIgnoreTestCategory;
-import com.owncloud.android.test.ui.groups.SmokeTestCategory;
-import com.owncloud.android.test.ui.models.LoginForm;
-import com.owncloud.android.test.ui.models.FileListView;
-import com.owncloud.android.test.ui.models.MenuList;
-import com.owncloud.android.test.ui.models.SettingsView;
+import org.elastos.ditto.test.ui.actions.Actions;
+import org.elastos.ditto.test.ui.groups.NoIgnoreTestCategory;
+import org.elastos.ditto.test.ui.groups.SmokeTestCategory;
+import org.elastos.ditto.test.ui.models.LoginForm;
+import org.elastos.ditto.test.ui.models.FileListView;
+import org.elastos.ditto.test.ui.models.MenuList;
+import org.elastos.ditto.test.ui.models.SettingsView;
 
 public class LogoutTestSuite{
 	

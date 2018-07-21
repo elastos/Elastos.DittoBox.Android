@@ -1,4 +1,4 @@
-package com.owncloud.android.test.ui.groups;
+package org.elastos.ditto.test.ui.groups;
 
 import java.io.File;
 import java.io.IOException;

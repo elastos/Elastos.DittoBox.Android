@@ -1,7 +1,7 @@
-package com.owncloud.android.test;
+package org.elastos.ditto.test;
 
-import com.owncloud.android.db.ProviderMeta.ProviderTableMeta;
-import com.owncloud.android.providers.FileContentProvider;
+import org.elastos.ditto.db.ProviderMeta.ProviderTableMeta;
+import org.elastos.ditto.providers.FileContentProvider;
 import android.annotation.TargetApi;
 import android.net.Uri;
 import android.os.Build;

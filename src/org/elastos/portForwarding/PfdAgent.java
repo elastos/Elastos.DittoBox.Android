@@ -6,8 +6,8 @@ import android.os.Build;
 import android.util.Log;
 import android.content.Intent;
 
-import com.owncloud.android.MainApp;
-import com.owncloud.android.R;
+import org.elastos.ditto.MainApp;
+import org.elastos.ditto.R;
 
 import java.io.InputStream;
 import java.security.MessageDigest;

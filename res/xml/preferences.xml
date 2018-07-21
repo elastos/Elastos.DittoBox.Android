@@ -21,30 +21,30 @@
     <PreferenceCategory
         android:key="camera_uploads_category"
         android:title="@string/prefs_category_camera_upload">
-        <com.owncloud.android.ui.CheckBoxPreferenceWithLongTitle
+        <org.elastos.ditto.ui.CheckBoxPreferenceWithLongTitle
             android:key="camera_picture_uploads"
             android:summary="@string/prefs_camera_picture_upload_summary"
             android:title="@string/prefs_camera_picture_upload" />
-        <com.owncloud.android.ui.PreferenceWithLongSummary
+        <org.elastos.ditto.ui.PreferenceWithLongSummary
             android:key="camera_picture_uploads_path"
             android:title="@string/prefs_camera_picture_upload_path_title" />
-        <com.owncloud.android.ui.CheckBoxPreferenceWithLongTitle
+        <org.elastos.ditto.ui.CheckBoxPreferenceWithLongTitle
             android:key="camera_picture_uploads_on_wifi"
             android:title="@string/camera_picture_upload_on_wifi" />
-        <com.owncloud.android.ui.CheckBoxPreferenceWithLongTitle
+        <org.elastos.ditto.ui.CheckBoxPreferenceWithLongTitle
             android:key="camera_video_uploads"
             android:summary="@string/prefs_camera_video_upload_summary"
             android:title="@string/prefs_camera_video_upload" />
-        <com.owncloud.android.ui.PreferenceWithLongSummary
+        <org.elastos.ditto.ui.PreferenceWithLongSummary
             android:key="camera_video_uploads_path"
             android:title="@string/prefs_camera_video_upload_path_title" />
-        <com.owncloud.android.ui.CheckBoxPreferenceWithLongTitle
+        <org.elastos.ditto.ui.CheckBoxPreferenceWithLongTitle
             android:key="camera_video_uploads_on_wifi"
             android:title="@string/camera_video_upload_on_wifi" />
-        <com.owncloud.android.ui.PreferenceWithLongSummary
+        <org.elastos.ditto.ui.PreferenceWithLongSummary
             android:key="camera_uploads_source_path"
             android:title="@string/prefs_camera_upload_source_path_title" />
-        <com.owncloud.android.ui.dialog.OwnCloudListPreference
+        <org.elastos.ditto.ui.dialog.OwnCloudListPreference
             android:defaultValue="NOTHING"
             android:dialogTitle="@string/prefs_camera_upload_behaviour_dialogTitle"
             android:entries="@array/pref_behaviour_entries"

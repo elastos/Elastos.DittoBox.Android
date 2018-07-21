@@ -18,7 +18,7 @@
  *
  */
 
-package com.owncloud.android.test.ui.models;
+package org.elastos.ditto.test.ui.models;
 
 import org.openqa.selenium.support.PageFactory;
 

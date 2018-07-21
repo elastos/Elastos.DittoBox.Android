@@ -18,10 +18,10 @@
  *
  */
 
-package com.owncloud.android.test;
+package org.elastos.ditto.test;
 
-import com.owncloud.android.lib.common.accounts.AccountUtils;
-import com.owncloud.android.lib.resources.status.OwnCloudVersion;
+import org.elastos.ditto.lib.common.accounts.AccountUtils;
+import org.elastos.ditto.lib.resources.status.OwnCloudVersion;
 
 import android.test.AndroidTestCase;
 

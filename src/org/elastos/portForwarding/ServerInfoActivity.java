@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-import com.owncloud.android.R;
+import org.elastos.ditto.R;
 
 import org.elastos.carrier.exceptions.ElastosException;
 

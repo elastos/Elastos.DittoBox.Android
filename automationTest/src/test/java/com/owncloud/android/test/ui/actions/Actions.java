@@ -18,7 +18,7 @@
  *
  */
 
-package com.owncloud.android.test.ui.actions;
+package org.elastos.ditto.test.ui.actions;
 
 import java.util.HashMap;
 
@@ -30,20 +30,20 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.owncloud.android.test.ui.models.CertificatePopUp;
-import com.owncloud.android.test.ui.models.ElementMenuOptions;
-import com.owncloud.android.test.ui.models.GmailSendMailView;
-import com.owncloud.android.test.ui.models.ShareView;
-import com.owncloud.android.test.ui.models.UploadFilesView;
-import com.owncloud.android.test.ui.models.LoginForm;
-import com.owncloud.android.test.ui.models.FileListView;
-import com.owncloud.android.test.ui.models.MenuList;
-import com.owncloud.android.test.ui.models.NewFolderPopUp;
-import com.owncloud.android.test.ui.models.RemoveConfirmationView;
-import com.owncloud.android.test.ui.models.SettingsView;
-import com.owncloud.android.test.ui.models.WaitAMomentPopUp;
-import com.owncloud.android.test.ui.testSuites.Common;
-import com.owncloud.android.test.ui.testSuites.Config;
+import org.elastos.ditto.test.ui.models.CertificatePopUp;
+import org.elastos.ditto.test.ui.models.ElementMenuOptions;
+import org.elastos.ditto.test.ui.models.GmailSendMailView;
+import org.elastos.ditto.test.ui.models.ShareView;
+import org.elastos.ditto.test.ui.models.UploadFilesView;
+import org.elastos.ditto.test.ui.models.LoginForm;
+import org.elastos.ditto.test.ui.models.FileListView;
+import org.elastos.ditto.test.ui.models.MenuList;
+import org.elastos.ditto.test.ui.models.NewFolderPopUp;
+import org.elastos.ditto.test.ui.models.RemoveConfirmationView;
+import org.elastos.ditto.test.ui.models.SettingsView;
+import org.elastos.ditto.test.ui.models.WaitAMomentPopUp;
+import org.elastos.ditto.test.ui.testSuites.Common;
+import org.elastos.ditto.test.ui.testSuites.Config;
 
 public class Actions {
 

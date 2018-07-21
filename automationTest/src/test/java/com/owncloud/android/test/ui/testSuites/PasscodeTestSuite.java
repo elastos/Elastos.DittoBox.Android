@@ -18,7 +18,7 @@
  *
  */
 
-package com.owncloud.android.test.ui.testSuites;
+package org.elastos.ditto.test.ui.testSuites;
 
 import io.appium.java_client.android.AndroidDriver;
 
@@ -32,13 +32,13 @@ import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.ScreenOrientation;
 
-import com.owncloud.android.test.ui.actions.Actions;
-import com.owncloud.android.test.ui.groups.NoIgnoreTestCategory;
-import com.owncloud.android.test.ui.models.FileListView;
-import com.owncloud.android.test.ui.models.MenuList;
-import com.owncloud.android.test.ui.models.PassCodeRequestView;
-import com.owncloud.android.test.ui.models.PassCodeView;
-import com.owncloud.android.test.ui.models.SettingsView;
+import org.elastos.ditto.test.ui.actions.Actions;
+import org.elastos.ditto.test.ui.groups.NoIgnoreTestCategory;
+import org.elastos.ditto.test.ui.models.FileListView;
+import org.elastos.ditto.test.ui.models.MenuList;
+import org.elastos.ditto.test.ui.models.PassCodeRequestView;
+import org.elastos.ditto.test.ui.models.PassCodeView;
+import org.elastos.ditto.test.ui.models.SettingsView;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PasscodeTestSuite {

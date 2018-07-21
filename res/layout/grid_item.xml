@@ -16,7 +16,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   
 -->
-<com.owncloud.android.ui.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.elastos.ditto.ui.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ListItemLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -91,4 +91,4 @@
         android:textColor="@color/textColor"
         android:textSize="16dip" />
 
-</com.owncloud.android.ui.SquareLinearLayout>
+</org.elastos.ditto.ui.SquareLinearLayout>

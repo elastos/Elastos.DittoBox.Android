@@ -14,7 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.owncloud.android.R;
+import org.elastos.ditto.R;
 
 import java.util.List;
 

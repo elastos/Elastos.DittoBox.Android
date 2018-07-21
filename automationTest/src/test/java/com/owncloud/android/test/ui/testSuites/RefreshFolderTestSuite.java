@@ -18,7 +18,7 @@
  *
  */
 
-package com.owncloud.android.test.ui.testSuites;
+package org.elastos.ditto.test.ui.testSuites;
 
 import static org.junit.Assert.*;
 import io.appium.java_client.android.AndroidDriver;
@@ -32,9 +32,9 @@ import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import com.owncloud.android.test.ui.actions.Actions;
-import com.owncloud.android.test.ui.groups.UnfinishedTestCategory;
-import com.owncloud.android.test.ui.models.FileListView;
+import org.elastos.ditto.test.ui.actions.Actions;
+import org.elastos.ditto.test.ui.groups.UnfinishedTestCategory;
+import org.elastos.ditto.test.ui.models.FileListView;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
