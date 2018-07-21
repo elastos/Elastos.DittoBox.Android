@@ -23,7 +23,7 @@ or
 
 ```shell
 $ git clone git@github.com:elastos/Elastos.DittoBox.Android.git
-$ git submoudle update --init --recursive
+$ git submodule update --init --recursive
 ```
 
 Then open this project with Android Studio to build distribution.
