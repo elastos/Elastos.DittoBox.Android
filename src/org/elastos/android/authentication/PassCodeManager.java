@@ -28,7 +28,7 @@ import android.preference.PreferenceManager;
 import android.view.WindowManager;
 
 import org.elastos.android.MainApp;
-import org.elastos.android.lib.BuildConfig;
+import com.owncloud.android.lib.BuildConfig;
 import org.elastos.android.ui.activity.PassCodeActivity;
 
 import org.elastos.android.MainApp;
