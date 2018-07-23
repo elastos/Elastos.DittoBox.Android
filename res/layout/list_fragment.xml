@@ -40,7 +40,7 @@
             android:footerDividersEnabled="false"
             android:visibility="visible" >
 
-            <org.elastos.ditto.ui.ExtendedListView
+            <org.elastos.android.ui.ExtendedListView
                 android:id="@+id/list_root"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

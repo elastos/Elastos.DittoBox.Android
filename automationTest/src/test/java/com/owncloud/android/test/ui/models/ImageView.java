@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.models;
+package org.elastos.android.test.ui.models;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -27,8 +27,8 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.PageFactory;
 
-import org.elastos.ditto.test.ui.actions.Actions;
-import org.elastos.ditto.test.ui.testSuites.Common;
+import org.elastos.android.test.ui.actions.Actions;
+import org.elastos.android.test.ui.testSuites.Common;
 
 
 public class ImageView {

@@ -1,4 +1,4 @@
-package org.elastos.ditto.test.ui.groups;
+package org.elastos.android.test.ui.groups;
 
 public interface InProgressCategory extends IgnoreTestCategory{
 

@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.models;
+package org.elastos.android.test.ui.models;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.Point;
 
-import org.elastos.ditto.test.ui.actions.Actions;
+import org.elastos.android.test.ui.actions.Actions;
 
 public class FileListView {
 	final AndroidDriver driver;

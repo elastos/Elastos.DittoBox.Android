@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.elastos.ditto.R;
+import org.elastos.android.R;
 
 import java.util.List;
 

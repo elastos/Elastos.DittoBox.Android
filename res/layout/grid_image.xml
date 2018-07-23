@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <org.elastos.ditto.ui.SquareImageView
+        <org.elastos.android.ui.SquareImageView
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

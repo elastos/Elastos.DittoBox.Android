@@ -47,7 +47,7 @@
 
     </FrameLayout>
 
-    <org.elastos.ditto.media.MediaControlView
+    <org.elastos.android.media.MediaControlView
         android:id="@id/media_controller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

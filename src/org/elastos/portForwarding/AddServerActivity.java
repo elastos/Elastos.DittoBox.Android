@@ -1,6 +1,6 @@
 package org.elastos.portForwarding;
 
-import org.elastos.ditto.R;
+import org.elastos.android.R;
 
 import android.content.Intent;
 import android.os.Bundle;

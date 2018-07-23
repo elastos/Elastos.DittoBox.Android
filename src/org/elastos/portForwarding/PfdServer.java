@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import org.elastos.ditto.MainApp;
+import org.elastos.android.MainApp;
 
 import java.net.ServerSocket;
 

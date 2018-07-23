@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.testSuites;
+package org.elastos.android.test.ui.testSuites;
 
 import static org.junit.Assert.*;
 import io.appium.java_client.android.AndroidDriver;
@@ -33,12 +33,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.openqa.selenium.ScreenOrientation;
 
-import org.elastos.ditto.test.ui.actions.Actions;
-import org.elastos.ditto.test.ui.groups.*;
-import org.elastos.ditto.test.ui.models.LoginForm;
-import org.elastos.ditto.test.ui.models.FileListView;
-import org.elastos.ditto.test.ui.models.MenuList;
-import org.elastos.ditto.test.ui.models.SettingsView;
+import org.elastos.android.test.ui.actions.Actions;
+import org.elastos.android.test.ui.groups.*;
+import org.elastos.android.test.ui.models.LoginForm;
+import org.elastos.android.test.ui.models.FileListView;
+import org.elastos.android.test.ui.models.MenuList;
+import org.elastos.android.test.ui.models.SettingsView;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginTestSuite{

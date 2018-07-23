@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.testSuites;
+package org.elastos.android.test.ui.testSuites;
 
 
 import static org.junit.Assert.*;
@@ -37,21 +37,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import org.elastos.ditto.test.ui.actions.Actions;
-import org.elastos.ditto.test.ui.groups.FailingTestCategory;
-import org.elastos.ditto.test.ui.groups.InProgressCategory;
-import org.elastos.ditto.test.ui.groups.NoIgnoreTestCategory;
-import org.elastos.ditto.test.ui.groups.SmokeTestCategory;
-import org.elastos.ditto.test.ui.groups.UnfinishedTestCategory;
-import org.elastos.ditto.test.ui.models.FileDetailsView;
-import org.elastos.ditto.test.ui.models.ElementMenuOptions;
-import org.elastos.ditto.test.ui.models.GmailEmailListView;
-import org.elastos.ditto.test.ui.models.GmailEmailView;
-import org.elastos.ditto.test.ui.models.ImageView;
-import org.elastos.ditto.test.ui.models.FileListView;
-import org.elastos.ditto.test.ui.models.NotificationView;
-import org.elastos.ditto.test.ui.models.SettingsView;
-import org.elastos.ditto.test.ui.models.UploadView;
+import org.elastos.android.test.ui.actions.Actions;
+import org.elastos.android.test.ui.groups.FailingTestCategory;
+import org.elastos.android.test.ui.groups.InProgressCategory;
+import org.elastos.android.test.ui.groups.NoIgnoreTestCategory;
+import org.elastos.android.test.ui.groups.SmokeTestCategory;
+import org.elastos.android.test.ui.groups.UnfinishedTestCategory;
+import org.elastos.android.test.ui.models.FileDetailsView;
+import org.elastos.android.test.ui.models.ElementMenuOptions;
+import org.elastos.android.test.ui.models.GmailEmailListView;
+import org.elastos.android.test.ui.models.GmailEmailView;
+import org.elastos.android.test.ui.models.ImageView;
+import org.elastos.android.test.ui.models.FileListView;
+import org.elastos.android.test.ui.models.NotificationView;
+import org.elastos.android.test.ui.models.SettingsView;
+import org.elastos.android.test.ui.models.UploadView;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

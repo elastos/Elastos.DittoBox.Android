@@ -1,7 +1,7 @@
-package org.elastos.ditto.test;
+package org.elastos.android.test;
 
-import org.elastos.ditto.db.ProviderMeta.ProviderTableMeta;
-import org.elastos.ditto.providers.FileContentProvider;
+import org.elastos.android.db.ProviderMeta.ProviderTableMeta;
+import org.elastos.android.providers.FileContentProvider;
 import android.annotation.TargetApi;
 import android.net.Uri;
 import android.os.Build;

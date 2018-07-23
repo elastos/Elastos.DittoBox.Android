@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.testSuites;
+package org.elastos.android.test.ui.testSuites;
 
 import static org.junit.Assert.*;
 import io.appium.java_client.android.AndroidDriver;
@@ -34,13 +34,13 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import org.elastos.ditto.test.ui.actions.Actions;
-import org.elastos.ditto.test.ui.groups.NoIgnoreTestCategory;
-import org.elastos.ditto.test.ui.groups.SmokeTestCategory;
-import org.elastos.ditto.test.ui.models.ElementMenuOptions;
-import org.elastos.ditto.test.ui.models.FileListView;
-import org.elastos.ditto.test.ui.models.NewFolderPopUp;
-import org.elastos.ditto.test.ui.models.WaitAMomentPopUp;
+import org.elastos.android.test.ui.actions.Actions;
+import org.elastos.android.test.ui.groups.NoIgnoreTestCategory;
+import org.elastos.android.test.ui.groups.SmokeTestCategory;
+import org.elastos.android.test.ui.models.ElementMenuOptions;
+import org.elastos.android.test.ui.models.FileListView;
+import org.elastos.android.test.ui.models.NewFolderPopUp;
+import org.elastos.android.test.ui.models.WaitAMomentPopUp;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

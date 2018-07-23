@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.models;
+package org.elastos.android.test.ui.models;
 
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.PageFactory;

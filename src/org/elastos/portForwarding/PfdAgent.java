@@ -6,8 +6,8 @@ import android.os.Build;
 import android.util.Log;
 import android.content.Intent;
 
-import org.elastos.ditto.MainApp;
-import org.elastos.ditto.R;
+import org.elastos.android.MainApp;
+import org.elastos.android.R;
 
 import java.io.InputStream;
 import java.security.MessageDigest;

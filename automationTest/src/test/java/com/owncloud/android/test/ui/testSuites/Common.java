@@ -18,7 +18,7 @@
  *
  */
 
-package org.elastos.ditto.test.ui.testSuites;
+package org.elastos.android.test.ui.testSuites;
 
 import static org.junit.Assert.*;
 

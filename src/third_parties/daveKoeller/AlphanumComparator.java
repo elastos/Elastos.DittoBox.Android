@@ -26,7 +26,7 @@ package third_parties.daveKoeller;
 import java.text.Collator;
 import java.util.Comparator;
 
-import org.elastos.ditto.datamodel.OCFile;
+import org.elastos.android.datamodel.OCFile;
 
 /**
  * This is an updated version with enhancements made by Daniel Migowski,
